@@ -1,0 +1,104 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card{
+    width: 30%;
+    border: 1px solid lightskyblue;
+    text-align: center;
+}
+
+.pokeImg{
+    width: 100%;
+}
+.pokeDetails{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.pokeDetails h3{
+    width: 50%;
+    margin: 0 auto;
+}
+.typeImg
+{
+    width: 20%;
+    margin: 0 auto;
+}
+
+.plante{
+    background-color: limegreen;
+    color: forestgreen;
+}
+.poison{
+    background-color: mediumorchid;
+    color: midnightblue;
+}
+.feu{
+    background-color: crimson;
+    color: black;
+}
+.vol{
+    background-color: azure;
+    color: midnightblue
+}
+.eau{
+    background-color: aqua;
+    color: midnightblue;
+}
+.insecte{
+    background-color: chartreuse;
+    color: forestgreen;
+}
+.normal{
+    background-color: darkgray;
+}
+.electrik{
+    background-color: gold;
+    background-color: darkorange;
+}
+.sol{
+    background-color: maroon;
+    color: cornsilk;
+}
+.fee{
+    background-color: floralwhite;
+    color: midnightblue;
+}
+.combat{
+    background-color: orangered;
+    color: black;
+}
+.psy{
+    background-color: mediumvioletred;
+    color: darkmagenta;
+}
+.roche{
+    background-color: dimgray;
+    color: brown;
+}
+.acier{
+    background-color: gainsboro;
+    color: dimgray;
+}
+.glace{
+    background-color: snow;
+    color: dimgray;
+}
+.spectre{
+    background-color: #fff;
+    color: dimgrey;
+}
+.dragon{
+    background-color: firebrick;
+    color: lavenderblush;
+}
+.tenebre{
+    background-color: black;
+    color: gray;
+}
