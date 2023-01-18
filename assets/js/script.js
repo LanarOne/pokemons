@@ -1,5 +1,5 @@
 async function getPokemons(){
-    let promise = await fetch(`https://pokebuildapi.fr/api/v1/pokemon/limit/251`);
+    let promise = await fetch(`https://pokebuildapi.fr/api/v1/pokemon/limit/850`);
     if(promise.ok){
         let pokemons = await promise.json()
         return pokemons
@@ -51,14 +51,12 @@ async function showPokemons(pokemons){
 
                 pokeTypes.forEach(type =>{
                     let pokeTypeImg = document.createElement('img')
-                    let pokeTypeName = document.createElement('h3')
                     let typeImg = type.image
-                    let typeName = document.createTextNode(type.name)
+                    // let typeName = document.createTextNode(type.name)
 
                     pokeTypeImg.setAttribute('src', `${typeImg}`)
                     pokeTypeImg.setAttribute('class', 'typeImg')
-                    pokeTypeName.append(typeName, pokeTypeImg)
-                    pokeTypesCtn.appendChild(pokeTypeName)
+                    pokeTypesCtn.appendChild(pokeTypeImg)
                     
                         if(pokeTypes.length==1){
                             if(pokeTypes[0].name === 'Feu'){
@@ -133,6 +131,14 @@ async function showPokemons(pokemons){
                                 pokeCardCtn.setAttribute('style',`background: linear-gradient(${poisonBGC},${combatBGC})`)
                             }else if(pokeType1 === 'Poison' && pokeType2==='Spectre'){
                                 pokeCardCtn.setAttribute('style',`background: linear-gradient(${poisonBGC},${spectreBGC})`)
+                            }else if(pokeType1 === 'Poison' && pokeType2==='Ténèbres'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${poisonBGC},${tenebreBGC})`)
+                            }else if(pokeType1 === 'Poison' && pokeType2==='Roche'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${poisonBGC},${rocheBGC})`)
+                            }else if(pokeType1 === 'Poison' && pokeType2==='Dragon'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${poisonBGC},${dragonBGC})`)
+                            }else if(pokeType1 === 'Poison' && pokeType2==='Électrik'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${poisonBGC},${electrikBGC})`)
                             }
                             else if(pokeType1 === 'Vol' && pokeType2==='Eau'){
                                 pokeCardCtn.setAttribute('style',`background: linear-gradient(${volBGC},${eauBGC})`)
@@ -470,6 +476,36 @@ async function showPokemons(pokemons){
                                 pokeCardCtn.setAttribute('style',`background: linear-gradient(${glaceBGC},${tenebreBGC})`)
                             }else if(pokeType1 === 'Feu' && pokeType2==='Ténèbres'){
                                 pokeCardCtn.setAttribute('style',`background: linear-gradient(${feuBGC},${tenebreBGC})`)
+                            }else if(pokeType1 === 'Feu' && pokeType2==='Psy'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${feuBGC},${psyBGC})`)
+                            }else if(pokeType1 === 'Feu' && pokeType2==='Dragon'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${feuBGC},${dragonBGC})`)
+                            }
+                            
+                            else if(pokeType1 === 'Spectre' && pokeType2==='Ténèbres'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${spectreBGC},${tenebreBGC})`)
+                            }else if(pokeType1 === 'Spectre' && pokeType2==='Glace'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${spectreBGC},${glaceBGC})`)
+                            }else if(pokeType1 === 'Spectre' && pokeType2==='Électrik'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${spectreBGC},${electrikBGC})`)
+                            }else if(pokeType1 === 'Spectre' && pokeType2==='Dragon'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${spectreBGC},${dragonBGC})`)
+                            }else if(pokeType1 === 'Spectre' && pokeType2==='Eau'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${spectreBGC},${eauBGC})`)
+                            }else if(pokeType1 === 'Spectre' && pokeType2==='Feu'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${spectreBGC},${feuBGC})`)
+                            }else if(pokeType1 === 'Spectre' && pokeType2==='Fée'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${spectreBGC},${feeBGC})`)
+                            }else if(pokeType1 === 'Spectre' && pokeType2==='Plante'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${spectreBGC},${planteBGC})`)
+                            }else if(pokeType1 === 'Spectre' && pokeType2==='Psy'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${spectreBGC},${psyBGC})`)
+                            }
+                            else if(pokeType1 === 'Dragon' && pokeType2==='Ténèbres'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${dragonBGC},${tenebreBGC})`)
+                            }
+                            else if(pokeType1 === 'Électrik' && pokeType2==='Fée'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${electrikBGC},${feeBGC})`)
                             }
                         }
                     
@@ -482,9 +518,14 @@ async function showPokemons(pokemons){
                 pokeDetailsCtn.appendChild(pokeTypesCtn)
                 pokeCardCtn.appendChild(pokeDetailsCtn)
 
-                container.appendChild(pokeCardCtn)                
+                container.appendChild(pokeCardCtn) 
+                pokeCardCtn.addEventListener('click', ()=>{
+                    const pokeTransfer = pokemon.id
+                    localStorage.setItem('pokemon', pokeTransfer)
+                    document.location.href='pokemon.html';
+                })               
     });
 }
-const detailCards = document.getElementsByClassName('pokeDetails')
+const detailCards = document.getElementsByClassName('pokeDetails');
 
 getPokemons().then(pokemons => showPokemons(pokemons));
