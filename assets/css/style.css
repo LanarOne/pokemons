@@ -1,12 +1,37 @@
+*{
+    box-sizing: border-box;
+}
+
 .container{
     display: flex;
     flex-wrap: wrap;
+    color: midnightblue;
+}
+
+header{
+    width: 100%;
+    background-color: gold;
+    margin: 0;
+    height: 5rem;
+    background-image: url('../media/logoPokeball.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+h1{
+    text-align: center;
+    width: 100%;
+    margin: 0
 }
 
 .card{
-    width: 30%;
+    width: 10rem;
     border: 1px solid lightskyblue;
     text-align: center;
+    padding: .5rem;
+    margin: 1rem auto;
+    text-align: center;
+    border-radius: 2rem;
 }
 
 .pokeImg{
@@ -29,6 +54,10 @@
 {
     width: 20%;
     margin: 0 auto;
+}
+
+.displayNone{
+    display: none;
 }
 
 .plante{
