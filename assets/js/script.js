@@ -1,5 +1,5 @@
 async function getPokemons(){
-    let promise = await fetch(`https://pokebuildapi.fr/api/v1/pokemon/limit/850`);
+    let promise = await fetch(`https://pokebuildapi.fr/api/v1/pokemon/limit/898`);
     if(promise.ok){
         let pokemons = await promise.json()
         return pokemons
@@ -31,20 +31,39 @@ async function showPokemons(pokemons){
                 
                 if(pokeEvo.length>0){
                     let evolutionCtn = document.createElement('p')
+                    
+            
                     if(pokeEvo.length>1){
+
+                        let evoText = document.createTextNode('Évolue en: ')
+                        evolutionCtn.appendChild(evoText)
+
                         pokeEvo.forEach(evo =>{
-                            let evolution = document.createTextNode(`${evo.name}, `)
-                            evolutionCtn.appendChild(evolution)
+                            let evoLink = document.createElement('a')
+                            let evolution = document.createTextNode(`${evo.name} `)
+
+                            evoLink.setAttribute('href',`#${evo.name}`)
+
+                            evoLink.appendChild(evolution)
+                            evolutionCtn.appendChild(evoLink)
                             pokeDetailsCtn.appendChild(evolutionCtn)
+                            
                         })
                     }else{
-                        let evolution = document.createTextNode(`évolue en: ${pokeEvo[0].name}`)
-                        evolutionCtn.appendChild(evolution)
+                        let evoText = document.createTextNode('Évolue en: ')
+                        let evoLink = document.createElement('a')
+
+                        evoLink.setAttribute('href',`#${pokeEvo[0].name}`)
+                        evolutionCtn.appendChild(evoText)
+                        let evolution = document.createTextNode(`${pokeEvo[0].name}`)
+                        
+                        evoLink.appendChild(evolution)
+                        evolutionCtn.appendChild(evoLink)
                         pokeDetailsCtn.appendChild(evolutionCtn)
                     }
                 }else{
                     let evolutionCtn = document.createElement('p')
-                    let evolution = document.createTextNode(`Evolution maximum`)
+                    let evolution = document.createTextNode(`Évolution maximum`)
                     evolutionCtn.appendChild(evolution)
                     pokeDetailsCtn.appendChild(evolutionCtn)
                 }
@@ -52,7 +71,6 @@ async function showPokemons(pokemons){
                 pokeTypes.forEach(type =>{
                     let pokeTypeImg = document.createElement('img')
                     let typeImg = type.image
-                    // let typeName = document.createTextNode(type.name)
 
                     pokeTypeImg.setAttribute('src', `${typeImg}`)
                     pokeTypeImg.setAttribute('class', 'typeImg')
@@ -876,6 +894,23 @@ async function showPokemons(pokemons){
                                 pokeCardCtn.setAttribute('style',`background: linear-gradient(${electrikBGC},${feeBGC})`)
                                 pokeCardCtn.classList.add('electrik')
                                 pokeCardCtn.classList.add('fee')
+                            }else if(pokeType1 === 'Électrik' && pokeType2==='Ténèbres'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${electrikBGC},${tenebreBGC})`)
+                                pokeCardCtn.classList.add('electrik')
+                                pokeCardCtn.classList.add('tenebre')
+                            }else if(pokeType1 === 'Électrik' && pokeType2==='Glace'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${electrikBGC},${glaceBGC})`)
+                                pokeCardCtn.classList.add('electrik')
+                                pokeCardCtn.classList.add('glace')
+                            }else if(pokeType1 === 'Électrik' && pokeType2==='Dragon'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${electrikBGC},${dragonBGC})`)
+                                pokeCardCtn.classList.add('electrik')
+                                pokeCardCtn.classList.add('dragon')
+                            }
+                            else if(pokeType1 === 'Ténèbres' && pokeType2==='Fée'){
+                                pokeCardCtn.setAttribute('style',`background: linear-gradient(${tenebreBGC},${feeBGC})`)
+                                pokeCardCtn.classList.add('tenebre')
+                                pokeCardCtn.classList.add('fee')
                             }
                         }
                     
@@ -895,15 +930,24 @@ async function showPokemons(pokemons){
                     const pokeTransfer = pokemon.id
                     localStorage.setItem('pokemon', pokeTransfer)
                     document.location.href='pokemon.html';
-                })               
+                })           
+                
     });
+
 }
 
-pokeSelect.addEventListener('change',(e)=>{
-    let pokeTri = document.getElementsByTagName('.normal')
-    if(pokeSelect.value=='normal'){
-        pokeCardCtn.classList.add('displayNone')
-        console.log(pokeTri);
-    }
-        })
 getPokemons().then(pokemons => showPokemons(pokemons));
+
+pokeSelect.addEventListener('change',(e)=>{
+    let pokeCards = document.querySelectorAll('.card')
+    let pokeTri = document.querySelectorAll(`.${pokeSelect.value}`)
+              
+    pokeCards.forEach(pokeCard=>{
+        pokeCard.classList.add('displayNone')
+    })
+    pokeTri.forEach(poke=>{
+        poke.classList.remove('displayNone')
+    })
+    
+    })
+    

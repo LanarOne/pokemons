@@ -8,6 +8,10 @@
     color: midnightblue;
 }
 
+body{
+    background: linear-gradient(yellow,cadetblue);
+}
+
 header{
     width: 100%;
     background-color: gold;
@@ -17,15 +21,30 @@ header{
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-h1{
+
+h1,
+h2,
+h3{
     text-align: center;
     width: 100%;
     margin: 0
 }
+a{
+    text-decoration: none;
+    color: midnightblue;
+    border-bottom: 1px solid transparent;
+    transition: all .5s;
+}
+a:hover{
+    border-bottom: 1px solid yellow;
+}
 
 .card{
-    width: 18%;
+    width: 23%;
     border: 1px solid lightskyblue;
     text-align: center;
     padding: .5rem;
@@ -56,7 +75,7 @@ h1{
 }
 .typeImg
 {
-    width: 20%;
+    width: 30%;
     margin: 0 auto;
 }
 
@@ -78,7 +97,7 @@ h1{
 }
 .vol{
     background-color: azure;
-    color: midnightblue
+    color: midnightblue;
 }
 .eau{
     background-color: aqua;
@@ -134,4 +153,44 @@ h1{
 .tenebre{
     background-color: black;
     color: gray;
+}
+
+/***** page 2 *****/
+
+.container{
+    border: 5px ridge midnightblue;
+}
+
+.container img{
+    width: 100%;
+}
+.pokeFightHdr{
+    display: flex;
+    justify-content: space-around;
+}
+
+.fighters{
+    display: flex;
+}
+.fighters article{
+    width: 50%;
+}
+
+.statsCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.statsCard p{
+    margin: 0 auto;
+}
+
+.typesCtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.typesCtn img{
+    width: 30%;
 }
