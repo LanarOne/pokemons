@@ -1,9 +1,10 @@
 const pokeCard = localStorage.getItem('pokemon');
-const container = document.getElementById('container');
 const randomCtndr = document.getElementById('randomCtndr')
+const fightBtn = document.getElementById('fight')
+import { randomItg } from "./randomFunction.js";
+const randomPoke = `${randomItg(1, 898)}`
 async function getPokemonById(){
     let promise = await fetch(`https://pokebuildapi.fr/api/v1/pokemon/${pokeCard}`);
-
     if(promise.ok){
         let pokemon = await promise.json();
         return pokemon;
@@ -11,17 +12,20 @@ async function getPokemonById(){
         // SI ERROR
     }
 }
-async function getPokemons(){
-    let promise = await fetch('https://pokebuildapi.fr/api/v1/pokemon/limit/150');
-    if(promise.ok){
-        let pokemons = await promise.json();
-        return pokemons
-    }else{
 
+async function getRandomPokemonById(){
+    let promise = await fetch(`https://pokebuildapi.fr/api/v1/pokemon/${randomPoke}`);
+
+    if(promise.ok){
+        let pokemonRdm = await promise.json();
+        return pokemonRdm;
+    }else{
+        // SI ERROR
     }
 }
 
 async function showPokemon(pokemon){
+console.log(pokemon);
     const nameCtn = document.createElement('h3');
     const imgPoke = document.createElement('img');
     const statsCard = document.createElement('div');
@@ -35,6 +39,7 @@ async function showPokemon(pokemon){
 
     typesCtn.setAttribute('class','typesCtn');
     imgPoke.setAttribute('src',`${pokemon.image}`);
+    imgPoke.setAttribute('class','pokeImg2')
     statsCard.setAttribute('class','statsCard');
 
     const name = document.createTextNode(pokemon.name);
@@ -50,6 +55,7 @@ async function showPokemon(pokemon){
         let typeImgCtn = document.createElement('img');
         let typeImg = types[0].image;
         typeImgCtn.setAttribute('src',`${typeImg}`);
+        typeImgCtn.setAttribute('class','imgCtn')
         typesCtn.appendChild(typeImgCtn);
     }else if(types.length>1){
     
@@ -59,6 +65,8 @@ async function showPokemon(pokemon){
         let typeImg2 = types[1].image;
         typeImgCtn1.setAttribute('src',`${typeImg1}`);
         typeImgCtn2.setAttribute('src',`${typeImg2}`);
+        typeImgCtn1.setAttribute('class','imgCtn')
+        typeImgCtn2.setAttribute('class','imgCtn')
         typesCtn.appendChild(typeImgCtn1);
         typesCtn.appendChild(typeImgCtn2);
     }
@@ -79,12 +87,32 @@ async function showPokemon(pokemon){
     statsCard.appendChild(speDefCtn);
     statsCard.appendChild(speedCtn);
 
-    container.appendChild(nameCtn);
-    container.appendChild(imgPoke);
-    container.appendChild(statsCard);
+    if(pokemon.id==pokeCard){
+        const container = document.getElementById('container');
+        imgPoke.setAttribute('id','monPkm')
+        container.appendChild(nameCtn);
+        container.appendChild(imgPoke);
+        container.appendChild(statsCard);
+    }else if(pokemon.id==randomPoke){
+        const container = document.getElementById('randomCtn');
+        imgPoke.setAttribute('id','randomPkm')
+        container.appendChild(nameCtn);
+        container.appendChild(imgPoke);
+        container.appendChild(statsCard);
+    }
 }
 
 getPokemonById().then(pokemon=>showPokemon(pokemon));
-randomCtndr.addEventListener('submit', getPokemons(pokemons))
-console.log(pokemons);
+randomCtndr.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const container = document.getElementById('randomCtn');
+    container.innerHTML = '<h2>Contender<h2>';
+    getRandomPokemonById().then(pokemonRdm=>showPokemon(pokemonRdm));
+})
 
+fightBtn.addEventListener('click',(e)=>{
+    e.preventDefault()
+    const fightCtn = document.getElementById('arena');
+    const monPkm = document.getElementById('monPkm');
+    const randomPkm = document.getElementById('randomPkm');
+})

@@ -157,12 +157,14 @@ a:hover{
 
 /***** page 2 *****/
 
-.container{
+.container2,
+.randomCtn{
     border: 5px ridge midnightblue;
+    margin: 1rem;
 }
 
-.container img{
-    width: 100%;
+.pokeImg{
+    max-width: 100%;
 }
 .pokeFightHdr{
     display: flex;
@@ -191,6 +193,27 @@ a:hover{
     align-items: center;
     justify-content: center;
 }
-.typesCtn img{
+.imgCtn{
     width: 30%;
+}
+.pokeImg2{
+    width: 100%;
+}
+
+.arena{
+    background-image: url('https://cdn.discordapp.com/attachments/1057063003448680528/1065996762554302494/LanarOne_realistic_giant_pokemon_coliseum_Mewtwo.pokemon_statue_ba79deed-27e0-4f2c-a6a0-345b79ff82e0.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
+
+@keyframes slideIn {
+    from{
+        transform: translateY(100%);
+    }
+    to{
+        transform: translateY(0%);
+    }
 }
